@@ -27,12 +27,18 @@ export default (force = false) => {
       plugins: [],
     };
 
+    let customCss = '';
+    document.querySelectorAll('style[type="postcss"]').forEach(styleTag => {
+      customCss += styleTag.innerHTML;
+    })
+
     const result = await postcss([
       tailwindcss({ ...defaultConfig, ...userConfig }),
     ]).process(
       `
       @tailwind base;
       @tailwind components;
+      ${customCss}
       @tailwind utilities;
       `,
       {
