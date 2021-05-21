@@ -1,6 +1,6 @@
 {
   "name": "tailwindcss-jit-cdn",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "scripts": {
     "serve": "vue-cli-service serve --target lib --name tailwindcss-jit-cdn src/main.js",
     "build": "vue-cli-service build --target lib --name tailwindcss-jit-cdn src/main.js",
@@ -8,6 +8,10 @@
   },
   "main": "dist/tailwindcss-jit-cdn.umd.min.js",
   "dependencies": {
+    "@tailwindcss/aspect-ratio": "^0.2.0",
+    "@tailwindcss/forms": "^0.3.2",
+    "@tailwindcss/line-clamp": "^0.2.0",
+    "@tailwindcss/typography": "^0.4.0",
     "core-js": "^3.6.5",
     "modern-normalize": "^1.1.0",
     "nanoid": "^3.1.22",

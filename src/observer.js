@@ -24,7 +24,12 @@ export default (force = false) => {
       mode: "jit",
       purge: [VIRTUAL_HTML_FILENAME],
       theme: {},
-      plugins: [],
+      plugins: [
+        require("@tailwindcss/forms"), 
+        require("@tailwindcss/typography"),
+        require("@tailwindcss/aspect-ratio"),
+        require("@tailwindcss/line-clamp")
+      ],
     };
 
     let customCss = '';
