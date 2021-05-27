@@ -113,12 +113,7 @@ async function tailwindRunner() {
 
       let defaultConfig = {
         theme: {},
-        plugins: [
-          require("@tailwindcss/forms"),
-          require("@tailwindcss/typography"),
-          require("@tailwindcss/aspect-ratio"),
-          require("@tailwindcss/line-clamp"),
-        ],
+        plugins: [],
       };
 
       const result = await postcss([
