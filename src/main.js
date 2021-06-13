@@ -1,21 +1,20 @@
-import observerScript from "./observer";
+import observer, { update, scheduleUpdate, setConfig } from "./observer";
 
-(() => {  
+(() => {
   const config = {
     attributes: true,
     attributeFilter: ["class"],
+    characterData: true,
     childList: true,
-    subtree: true, 
+    subtree: true,
   };
 
-  new MutationObserver(observerScript(false)).observe(
-    document.documentElement,
-    config
-  );
+  new MutationObserver(observer).observe(document.documentElement, config);
 
-  observerScript();
+  scheduleUpdate();
 
   window.tailwindCSS = {
-    refresh: observerScript(true),
-  }
+    refresh: update,
+    setConfig: setConfig,
+  };
 })();

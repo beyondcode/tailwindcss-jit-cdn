@@ -11,6 +11,7 @@ const externals = {
 
 const moduleOverrides = {
   fs: path.resolve(__dirname, "src/modules/fs.js"),
+  colorette: path.resolve(__dirname, "src/modules/colorette.js"),
 };
 
 function getExternal(context, request, callback) {
@@ -41,7 +42,6 @@ const files = [
 module.exports = {
   productionSourceMap: false,
   configureWebpack: (config) => {
-
     config.resolve.alias = { ...config.resolve.alias, ...moduleOverrides };
 
     config.plugins.push(
@@ -67,15 +67,15 @@ module.exports = {
     // avoids node-specific stuff
     // this essentially makes fast-glob return whatever it is passed
     config.module.rules.push({
-      test: require.resolve('tailwindcss/node_modules/fast-glob'),
+      test: require.resolve("tailwindcss/node_modules/fast-glob"),
       use: [
-        createLoader(function (_source) {
+        createLoader(function(_source) {
           return `module.exports = {
             sync: (patterns) => [].concat(patterns)
-          }`
+          }`;
         }),
       ],
-    })
+    });
 
     config.module.rules.push({
       test: require.resolve("tailwindcss/jit/pluginUtils.js"),
@@ -110,9 +110,7 @@ module.exports = {
           /_fs\.default\.readFileSync\(.*?'utf8'\)/g,
           (m) => {
             for (let i = 0; i < files.length; i++) {
-              if (
-                files[i].pattern.test(m)
-              ) {
+              if (files[i].pattern.test(m)) {
                 return (
                   "`" +
                   fs.readFileSync(files[i].file, "utf8").replace(/`/g, "\\`") +
