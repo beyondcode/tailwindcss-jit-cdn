@@ -1,6 +1,6 @@
 {
   "name": "tailwindcss-jit-cdn",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "scripts": {
     "serve": "vue-cli-service serve --target lib --name tailwindcss-jit-cdn src/main.js",
     "build": "vue-cli-service build --target lib --name tailwindcss-jit-cdn src/main.js",
@@ -17,7 +17,7 @@
     "nanoid": "^3.1.22",
     "normalize.css": "^8.0.1",
     "postcss": "^8.1.6",
-    "tailwindcss": "^2.1.2"
+    "tailwindcss": "^2.2.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.4.0",

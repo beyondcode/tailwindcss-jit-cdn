@@ -7,6 +7,7 @@ const externals = {
   resolve: "self.resolve",
   chokidar: "self.chokidar",
   purgecss: "self.purgecss",
+  tmp: 'self.tmp',
 };
 
 const moduleOverrides = {
@@ -54,18 +55,23 @@ module.exports = {
     // there's some node-specific stuff in parse-glob
     // we don't use globs though so this can be overridden
     config.module.rules.push({
-      test: require.resolve("parse-glob"),
+      test: require.resolve('tailwindcss/node_modules/glob-parent'),
       use: [
         createLoader(function(_source) {
-          return `module.exports = () => ({
-            is: { glob: false },
-          })`;
+          return `module.exports = () => ''`;
         }),
       ],
     });
 
-    // avoids node-specific stuff
-    // this essentially makes fast-glob return whatever it is passed
+    config.module.rules.push({
+      test: require.resolve('is-glob'),
+      use: [
+        createLoader(function(_source) {
+          return `module.exports = () => false`;
+        }),
+      ],
+    });
+
     config.module.rules.push({
       test: require.resolve('tailwindcss/node_modules/fast-glob'),
       use: [
@@ -78,26 +84,7 @@ module.exports = {
     })
 
     config.module.rules.push({
-      test: require.resolve("tailwindcss/jit/pluginUtils.js"),
-      use: createLoader(function(source) {
-        return source.replace(
-          `return transform(value).replace(/(?<=^calc\\(.+?)(?<![-+*/(])([-+*/])/g, ' $1 ')`,
-          `
-            value = transform(value)
-            if (value.startsWith('calc(')) {
-              // add spaces around operators inside calc() that do not follow an operator or (
-              return value.replace(/[-+*/(]+/g, (match) =>
-                match[0] === '(' ? match : [' ', match[0], ' ', ...match.slice(1)].join('')
-              )
-            }
-            return value
-          `
-        );
-      }),
-    });
-
-    config.module.rules.push({
-      test: require.resolve("tailwindcss/lib/index.js"),
+      test: require.resolve("tailwindcss/lib/jit/processTailwindFeatures.js"),
       use: createLoader(function(source) {
         return source.replace(`let warned = false;`, `let warned = true;`);
       }),
