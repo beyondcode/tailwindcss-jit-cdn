@@ -34,7 +34,7 @@ Then, link to your new `dist/tailwindcss-jit-cdn.umd.js` in your project in orde
 A set of `tailwindOptions` to configure for the JIT CDN. Currently there is only one option available, you can use it as follows:
 
 ```
-window.options = {
+window.tailwindOptions = {
     observerElement: document.getElementById('app')
 };
 ```
