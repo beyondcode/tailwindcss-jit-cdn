@@ -18,6 +18,31 @@ You can learn all about this package in our [in-depth blog post](https://beyondc
 
 We spend a lot of time working on our [free developer services](https://beyondco.de/services) or open source packages. You can support our work by [buying one of our paid products](https://beyondco.de/software).
 
+## Development
+
+If you want to create your own build of TailwindCSS JIT CDN, you can fork this repo, clone it, and then run the following commands to get started:
+
+```
+yarn install
+yarn run build
+```
+
+Then, link to your new `dist/tailwindcss-jit-cdn.umd.js` in your project in order to run your build.
+
+## Options
+
+You can define a set of `tailwindOptions` to override a few options for the JIT CDN.
+
+💡 If you have ideas for options you would like to see, let us know. Currently there is only one options available:
+
+```
+window.options = {
+    observerElement: document.getElementById('app')
+};
+```
+
+> In the example above, the TailwindCSS JIT CDN will only observe and modify elements inside of the `app` element. This might be helpful for page speed, user experience, or a few other scenarios.
+
 ## Credits
 
 - [Marcel Pociot](https://github.com/mpociot)
