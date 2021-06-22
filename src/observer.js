@@ -8,9 +8,9 @@ const tailwindId = nanoid();
 
 let lastProcessedHtml = "";
 
-export default (force = false) => {
+export default (options, force = false) => {
   return async () => {
-    self[VIRTUAL_HTML_FILENAME] = document.documentElement.outerHTML;
+    self[VIRTUAL_HTML_FILENAME] = options.observerElement.outerHTML;
 
     if (self[VIRTUAL_HTML_FILENAME] === lastProcessedHtml && force === false) {
       return;
@@ -25,7 +25,7 @@ export default (force = false) => {
       purge: [VIRTUAL_HTML_FILENAME],
       theme: {},
       plugins: [
-        require("@tailwindcss/forms"), 
+        require("@tailwindcss/forms"),
         require("@tailwindcss/typography"),
         require("@tailwindcss/aspect-ratio"),
         require("@tailwindcss/line-clamp")
