@@ -31,9 +31,7 @@ Then, link to your new `dist/tailwindcss-jit-cdn.umd.js` in your project in orde
 
 ## Options
 
-You can define a set of `tailwindOptions` to override a few options for the JIT CDN.
-
-💡 If you have ideas for options you would like to see, let us know. Currently there is only one options available:
+A set of `tailwindOptions` to configure for the JIT CDN. Currently there is only one option available, you can use it as follows:
 
 ```
 window.options = {
@@ -42,6 +40,8 @@ window.options = {
 ```
 
 > In the example above, the TailwindCSS JIT CDN will only observe and modify elements inside of the `app` element. This might be helpful for page speed, user experience, or a few other scenarios.
+
+💡 Have ideas for options you would like to see, let us know.
 
 ## Credits
 
