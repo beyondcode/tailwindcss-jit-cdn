@@ -39,7 +39,7 @@ window.options = {
 };
 ```
 
-> In the example above, the TailwindCSS JIT CDN will only observe and modify elements inside of the `app` element. This might be helpful for page speed, user experience, or a few other scenarios.
+> By default the TailwindCSS JIT CDN will observe your entire page via `document.documentElement`, you can override this option via the `observerElement` property. In the options above the observer will only observe Tailwind classes inside of `app` element. This might be helpful for page speed, user experience, or a few other scenarios.
 
 💡 Have ideas for options you would like to see, let us know.
 
