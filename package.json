@@ -12,6 +12,7 @@
     "@tailwindcss/forms": "^0.3.2",
     "@tailwindcss/line-clamp": "^0.2.0",
     "@tailwindcss/typography": "^0.4.0",
+    "autoprefixer": "^10.3.7",
     "core-js": "^3.6.5",
     "modern-normalize": "^1.1.0",
     "nanoid": "^3.1.22",
