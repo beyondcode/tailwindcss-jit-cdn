@@ -2,6 +2,7 @@ import parseCustomConfig from "./parseCustomConfig";
 import { VIRTUAL_SOURCE_PATH, VIRTUAL_HTML_FILENAME } from "./constants";
 import tailwindcss from "tailwindcss";
 import postcss from "postcss";
+import autoprefixer from "autoprefixer";
 import { nanoid } from "nanoid";
 
 const tailwindId = nanoid();
@@ -22,7 +23,7 @@ export default (force = false) => {
 
     let defaultConfig = {
       mode: "jit",
-      purge: [VIRTUAL_HTML_FILENAME],
+      purge: [],
       theme: {},
       plugins: [
         require("@tailwindcss/forms"), 
@@ -32,13 +33,21 @@ export default (force = false) => {
       ],
     };
 
+    const combinedConfig = {
+      ...defaultConfig,
+      ...userConfig
+    }
+
+    combinedConfig.purge.push(VIRTUAL_HTML_FILENAME)
+
     let customCss = '';
     document.querySelectorAll('style[type="postcss"]').forEach(styleTag => {
       customCss += styleTag.innerHTML;
     })
 
     const result = await postcss([
-      tailwindcss({ ...defaultConfig, ...userConfig }),
+      tailwindcss(combinedConfig),
+      autoprefixer({})
     ]).process(
       `
       @tailwind base;
